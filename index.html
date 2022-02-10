@@ -139,28 +139,28 @@
 .de ul
 \\$3\Z'\\$1'\v'.1m'\D'l \w'\\$1'u 0'\v'-.1m'\\$2
 ..
-.\" xl -- crossed out line
+.\" xl -- strikeout
 .de xl
 \\$3\\Z'\\$1'\\v'-.23m'\\D'l \\w'\\$1'u 0'\v'.25m'\\$2
 ..
 .\" Paragraphs ---------------------
-.\" p -- simple paragraph
+.\" p -- paragraph
 .de p
 . RT
 . ne 1.5
 ..
-.\" pp -- first-line indented paragraphs
+.\" pp -- first-line indented paragraph
 .de pp
 . p
 . ti +3n
 ..
-.\" qp -- quoted paragraphs
+.\" qp -- quoted paragraph
 .de qp
 . p
 . in \\n[en.in]u+0.5i
 . ll -\\n[en.ip]u
 ..
-.\" ip -- indented paragraphs
+.\" ip -- indented paragraph
 .de ip
 . p
 . if \\n(.$>1 .nr en.ip \\$2
@@ -182,7 +182,7 @@
 . if \\n(.$ .nr en.pi \\$1
 . nr en.in -\\n[en.pi]
 ..
-.\" h -- simple header
+.\" h -- header
 .de h
 . p
 . sp 0.9
