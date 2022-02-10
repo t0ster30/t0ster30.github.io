@@ -1,60 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/png" href="data:image/png;base64,">
-<title>t0ster30's website</title>
-<style>
-	@media (prefers-color-scheme: dark){
-		body {color:#fff;background:#aaa}
-		a:link {color:#5cf}
-		a:hover, a:visited:hover {color:#cef}
-		a:visited {color:#a9d}
-	}
-	body{
-		margin:1em auto;
-		max-width:40em;
-		padding:0 .62em;
-		font:1.2em/1.62 sans-serif;
-	}
-	h1,h2,h3 {
-		line-height:1.2;
-	}
-	@media print{
-		body{
-			max-width:none
-		}
-	}
-</style>
-<article>
-<h1>t0ster30's webpage</h1>
-<p>Also known as <code>yss</code> or <code>sys</code>.</p>
-<p>As you see there is next to nothing on this page.</p>
-<p>Except my util stack and *roff macro :þ.</p>
-<h2>Util Stack</h2>
-<ul>
-	<li>editor — <a title=Vis href="https://git.sr.ht/~martanne/vis/">vis</a>, <a title=Acme href="https://acme.cat-v.org">acme</a> and <a title=edit href="https://c9x.me/edit">edit</a></li>
-	<li>grep — <a title=QuickGrep href="https://github.com/theproductiveprogrammer/QuickGrep">gg</a></li>
-	<li>terminal — <a title="Kitty terminal" href="https://sw.kovidgoyal.net/kitty">kitty</a></li>
-	<li>shell — zsh, moving to rc/(d)ash</li>
-	<li>player — cmus, moving to <a title=m9u href="http://sqweek.net/code/m9u">m9u</a> + sox</li>
-	</ul>
-<h2>mt *roff macro</h2>
-<p>Essentially it is the -en macro from Neatroff.</p>
-<p>To see what this macro can do use <code>grep -- <a title="Download the macro" href="tmac.t">tmac.t</a></code>.</p>
-<p>You need to run</p>
-<p><code>sed 's/AUTHOR/[insert your name here]/g'</code></p>
-<p>and</p>
-<p><code>sed 's/INSTITUTION/[your place of education]/g'</code></p>
-<p><em>before</em> you start using the macro.</p>
-<p>Also don't forget to mount the fonts.</p>
-<pre>.ft - R [your Regular font]
-.ft - B  [your Bold font]
-.ft - I  [your Itali font]
-.ft - CR [your Code-Regular font]</pre>
-<h3>the macro itself</h3>
-<pre><code>.\" BASE MACROS
-.\" [t0ster30-1]
+.\" BASE MACROS
+.\" [Styopkin1]
 .\" Registers and their default values
 .nr PS 10  \" font size
 .nr VS 13  \" vertical spacing
@@ -93,10 +38,10 @@
 .de FT  \" Page footer
 . ev en.ft
 . FP
-' sp |\\n(.pu+\\n(FPu
+. sp |\\n(.pu+\\n(FPu
 . RT
 . FT.pg
-' bp
+. bp
 . ev
 . if \\n(.t==(\\n(.p+(\\n(FP)) .HD
 ..
@@ -112,28 +57,28 @@
 . el 'sp
 ..
 .de HD.pg \" Header page number
-' sp 3
+. sp 3
 ..
 .\" Font styles --------------------
 .\" r -- regular font
 .de r
-\\$3\\fR\\$1\fP\\$2
+.\$3\\fR\\$1\fP\\$2
 ..
 .\" i -- italic font
 .de i
-\\$3\\fI\\$1\fP\\$2
+.\$3\\fI\\$1\fP\\$2
 ..
 .\" b -- bold font
 .de b
-\\$3\\fB\\$1\fP\\$2
+.\$3\\fB\\$1\fP\\$2
 ..
 .\" ul -- underline
 .de ul
-\\$3\Z'\\$1'\v'.1m'\D'l \w'\\$1'u 0'\v'-.1m'\\$2
+.\$3\Z'\\$1'\v'.1m'\D'l \w'\\$1'u 0'\v'-.1m'\\$2
 ..
 .\" xl -- crossed out line
 .de xl
-\\$3\\Z'\\$1'\\v'-.23m'\\D'l \\w'\\$1'u 0'\v'.25m'\\$2
+.\$3\\Z'\\$1'\\v'-.23m'\\D'l \\w'\\$1'u 0'\v'.25m'\\$2
 ..
 .\" Paragraphs ---------------------
 .\" p -- simple paragraph
@@ -141,7 +86,7 @@
 . RT
 . ne 1.5
 ..
-.\" pp -- first-line indented paragraphs
+.\" pp -- indented (red) paragraphs
 .de pp
 . p
 . ti +3n
@@ -157,7 +102,7 @@
 . p
 . if \\n(.$>1 .nr en.ip \\$2
 . in +\\n[en.ip]u
-\h'|-\\n[en.ip]u'\\$1
+.h'|-\\n[en.ip]u'\\$1
 . sp -1
 ..
 .\" qs -- quote start
@@ -181,7 +126,7 @@
 . cl \\*[en.cl]
 . ft B
 . if \\n(.$ \{\
-\\$*
+.\$*
 .  p
 . \}
 . dv mark "\\$*" \\n(.% \\n(nl \\$*
@@ -196,7 +141,7 @@
 . vs \\n(VS+6
 . fi
 . if \\n(.$ \{\
-\\$*
+.\$*
 .  p
 . \}
 . dv Title "\\$*
@@ -206,7 +151,7 @@
 . RT
 . ft R
 . in 1n
-\{\s[9]AUTHOR\s0
+.{\s[9]AUTHOR\s0
 . br
 . dv Author "AUTHOR"\}
 ..
@@ -215,23 +160,23 @@
 . RT
 . in 1n
 . ft I
-\{\s[8.5]INSTITUTION\s0\}
+.{\s[8.5]INSTITUTION\s0\}
 ..
 .\" ab -- abstract
 .de ab
 . ad c
-\f[R]\s[12.5]\h'2.1p'\v'-3p'\D'l 0.65P'\v'3p'\h'-2.1p'\
-\h'1.7p'd\h'-1.7p'l\
-\h'-1.25p'\v'-3p'\D'l 0.65P'\v'3p'\h'1.25p'\s0
+.f[R]\s[12.5]\h'2.1p'\v'-3p'\D'l 0.65P'\v'3p'\h'-2.1p'\
+.h'1.7p'd\h'-1.7p'l\
+.h'-1.25p'\v'-3p'\D'l 0.65P'\v'3p'\h'1.25p'\s0
 . ns
-\\fI\\$1\\s[8.25]
+.\fI\\$1\\s[8.25]
 . ad pr
 . ns
 ..
 .\" d -- date
 .de d
 . RT
-\n(dy.\?'\n(mo<10@0'\n(mo.20\n(yr
+.n(dy.\?'\n(mo<10@0'\n(mo.20\n(yr
 ..
 .\" bl -- bulleted list
 .de bl
@@ -266,7 +211,7 @@
 . if \\n(.$>0 .ds en.footsign "\\$1
 . in 2n
 . ti -1.5n
-\s[+0.5]\\*[en.footsign]\s[-0.5]
+.s[+0.5]\\*[en.footsign]\s[-0.5]
 . sp -1
 ..
 .\" ) -- end footnote
@@ -274,8 +219,8 @@
 . in 0
 . ev
 . di
-.\" \h'-0.5n'\s-3\u\\*[en.footsign]\d\s+3\h'1p'\\$1
-\h'-0.5n'\\*[en.footsign]\h'-0.5n'\\$1 \"comment out this line and uncomment upper to use your usual font
+.\" \h'-0.5n'\s-3\u\\*[en.footsign]\d\s+3\h'1p'\\$1 this line is needed for font without numerators
+.h'-0.5n'\\*[en.footsign]\h'-0.5n'\\$1
 . nr en.footpos -\\n(dn
 . ch FT \\n[en.footpos]u
 . ff R -numr
@@ -283,7 +228,7 @@
 .de FP
 . if \\n[en.footnum] \{\
 . ev en.footenv
-' nf
+. nf
 . en.footdiv
 . rm en.footdiv
 . ev
@@ -302,17 +247,17 @@
 . vs 10
 . po -7.35m
 . cl #656577
-\s[-2]
+.s[-2]
 ..
 .\" notr -- right marginal note
 .de notr
 . p
-. notl
+. NOTE
 . po 7.15i
 ..
 .\" note -- end note
 .de note
-\s0
+.s0
 . rt
 . RT
 ..
@@ -349,10 +294,10 @@
 .ds ct [\\$1]
 .\" rf refers
 .Ff [%A {, %y}]      \" (Author, Year)
-.Fr %a: {(%y)} {\fI%t\fR}. {\*Q%q\*U}. %n, %d. %c: %p. {Available at \m[#577eaa]%w\m[]}
+.Fr %a: {(%y)} {\fI%t\fR}. {\*Q%q\*U}. %n, %d. %c: %p. {Доступно на \m[#577eaa]%w\m[]}
 .\" c1 -- start code block
 .\" c2 -- end code block
-.de c1
+.de vS
 . RT
 . ev ev-code
 . sp .15v
@@ -363,7 +308,7 @@
 . ps 8
 . ta 360uL 720uL 1080uL 1440uL 1800uL
 ..
-.de c2 \" code block end
+.de vE \" code block end
 . ev
 . RT
 ..
@@ -372,7 +317,8 @@
 . lg 1
 . kn 1
 . wh \\n(FPu FT
-. hpf ../hyph/hyph-en-gb.pat.txt ../hyph/hyph-en-gb.hyp.txt ../hyph/hyph-en-gb.chr.txt
+. hpf ../hyph/hyph-ru.pat.txt ../hyph/hyph-ru.hyp.txt ../hyph/hyph-ru.chr.txt
+.\" . hpf ../hyph/hyph-en-gb.pat.txt ../hyph/hyph-en-gb.hyp.txt ../hyph/hyph-en-gb.chr.txt
 . hlm 2
 . hy 5
 . hycost 800
@@ -381,7 +327,4 @@
 . ssh 15
 . pmll 20 10
 ..
-.init</pre></code>
-	<h6>Yea, I <del>stole</del> used CSS from Best Mfkg Website.</h6>
-</article>
-		
+.init
