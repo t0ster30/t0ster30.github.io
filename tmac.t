@@ -27,11 +27,6 @@
 . in \\n[en.in]u
 . nr \\n[en.nl]
 . cl 0
-. AL
-..
-.\" Alignment
-.de AL
-. if \\n(.d%\\n(.v 'sp \\n(.vu-(\\n(.du%\\n(.vu)
 ..
 .\" Header and footer macros
 .de FT  \" Page footer
