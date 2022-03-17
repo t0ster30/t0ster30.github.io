@@ -212,21 +212,16 @@
 . RT
 . ft R
 . in 1n
-. ie \$1>0 \{\s[9]Styopkin Yegor\s0
-. br
-. dv Author "Styopkin Yegor"\}
-. el \{\s[9]Стёпкин Егор\s0
-. br
-. dv Author "Стёпкин Егор"\}
+. ps 9
+. dv Author "AUTHOR"
 ..
 .\" ai -- author’s institution
 .de ai
 . RT
 . in 1n
 . ft I
-. ps 8.5
-. ie \$1>0 \{Private school ‘Pervaya narodnaya shkola’\}
-. el \{ЧОУ «Первая народная школа»\}
+. ps 9
+. dv Institution "INSTITUTION"
 ..
 .\" ab -- abstract
 .de ab
