@@ -1,0 +1,11 @@
+@font-face{
+font-family:'MicroGrotesk';
+src:url(MicroGrotesk.woff2) format('woff2');font-weight:100 1000}
+:root{scroll-behavior:smooth;}
+body{margin:1em auto;max-width:36em;padding:.62em;font:18px/1.62 'MicroGrotesk',sans-serif;background-color:#efefef}
+a{text-decoration:none;color:inherit;transition-property:background;transition-duration:.15s}
+a:hover{background:#eccece;border-radius:3px}
+h1,h2,h3{line-height:1.2;margin-top:26px;margin-bottom:15px}
+p{line-height:1.2;margin:0;margin-bottom:15px}
+code{font-size:17px}
+::selection{background-color:#dbdbdb}
