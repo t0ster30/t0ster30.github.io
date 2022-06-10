@@ -213,7 +213,7 @@
 . ft R
 . in 1n
 . ps 9
-. dv Author "AUTHOR"
+. dv Author "-@author@-"
 ..
 .\" ai -- author’s institution
 .de ai
@@ -221,7 +221,7 @@
 . in 1n
 . ft I
 . ps 9
-. dv Institution "INSTITUTION"
+. dv Institution "-@institution@-"
 ..
 .\" ab -- abstract
 .de ab
