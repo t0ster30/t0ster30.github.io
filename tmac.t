@@ -6,12 +6,12 @@
 .nr LL 6i+1n \" line length
 .nr FP -1cm \" footer position
 .\" Internal registers
-.nr en.in 0   \" current indentation
-.nr en.ip 1m  \" IP indentation
-.nr en.pi 1m  \" RS indentation
-.nr en.pg 1   \" page numbering (0 disables)
+.nr t.in 0   \" current indentation
+.nr t.ip 1m  \" IP indentation
+.nr t.pi 1m  \" RS indentation
+.nr t.pg 1   \" page numbering (0 disables)
 .nr vs.nl 1   \" numbered lines in code block (0 disables)
-.ds en.cl "0  \" header colour
+.ds t.cl "0  \" header colour
 .ds TX \fRT\\h’-0.1667m’\\v’0.20v’E\\v’-0.20v’\\h’-0.125m’X\fP
 .ds LX \fRL\\h’-0.36m’\\v’-0.15v’\s-2A\s0\\h’-0.15m’\\v’0.15v’\fP\*(TX
 .
@@ -25,17 +25,17 @@
 . ll \\n(LLu
 . lt \\n(LLu
 . po \\n(POu
-. in \\n[en.in]u
+. in \\n[t.in]u
 . cl 0
 ..
 .\" Header and footer macros
 .de FT.pg \" Footer page number
 . ff R +tnum
-. ie \\n[en.pg]=1 'tl '''\s+4\>%\<\s-4'
+. ie \\n[t.pg]=1 'tl '''\s+4\>%\<\s-4'
 . el 'sp
 ..
 .de HD  \" Page header (called by FT)
-. ev en.ft
+. ev t.ft
 . RT
 . sp 1.3cm
 . HD.pg
@@ -44,7 +44,7 @@
 . keepbop
 ..
 .de FT  \" Page footer
-. ev en.ft
+. ev t.ft
 . FP
 ' sp |\\n(.pu+\\n(FPu
 . RT
@@ -105,9 +105,9 @@
 .\" ip -- indented paragraph
 .de ip
 . p
-. if \\n(.$>1 .nr en.ip \\$2
-. in +\\n[en.ip]u
-\h'|-\\n[en.ip]u'\\$1
+. if \\n(.$>1 .nr t.ip \\$2
+. in +\\n[t.ip]u
+\h'|-\\n[t.ip]u'\\$1
 . sp -1
 ..
 .\" xp -- backindented paragraph
@@ -129,21 +129,21 @@
 .\" qp -- quoted paragraph
 .de qp
 . p
-. in \\n[en.in]u+0.5i
+. in \\n[t.in]u+0.5i
 . ll -0.5i
 ..
 .\" qs -- quote start
 .de qs
 . p
-. if \\n(.$ .nr en.pi \\$1
-. nr en.in +\\n[en.pi]
+. if \\n(.$ .nr t.pi \\$1
+. nr t.in +\\n[t.pi]
 . ft I
 ..
 .\" qe -- quote end
 .de qe
 . br
-. if \\n(.$ .nr en.pi \\$1
-. nr en.in -\\n[en.pi]
+. if \\n(.$ .nr t.pi \\$1
+. nr t.in -\\n[t.pi]
 ..
 .\" t -- title
 .de t
@@ -164,7 +164,7 @@
 .de h
 . p
 . sp 0.9
-. cl \\*[en.cl]
+. cl \\*[t.cl]
 . ft B
 . if \\n(.$ \{\
 \\$*
@@ -213,7 +213,7 @@
 . ft R
 . in 1n
 . ps 9
-. dv Author "-@author@-"
+. dv Author "@au"
 ..
 .\" ai -- author’s institution
 .de ai
@@ -221,7 +221,7 @@
 . in 1n
 . ft I
 . ps 9
-. dv Institution "-@institution@-"
+. dv Institution "@ins"
 ..
 .\" ab -- abstract
 .de ab
@@ -245,59 +245,59 @@
 .de bl
 . p
 . mk
-. if \\n(.$>1 .nr en.ip \\$2
-. in +\\n[en.ip]u+1n
-. ie \\$1=\0 \{\h'|-\\n[en.ip]u-1n'\(em\}
-. el \{\h'|-\\n[en.ip]u'\\$1\}
+. if \\n(.$>1 .nr t.ip \\$2
+. in +\\n[t.ip]u+1n
+. ie \\$1=\0 \{\h'|-\\n[t.ip]u-1n'\(em\}
+. el \{\h'|-\\n[t.ip]u'\\$1\}
 . br
 . rt
 ..
 .\" l -- numbered list
 .de l
-. nr en.nl +1
-. bl \\n[en.nl].
+. nr t.nl +1
+. bl \\n[t.nl].
 ..
 .\" Footnotes ----------------------
 .\" ( -- start footnote
 .de (
 . ff R +numr
-. ie \\n[en.footnum] .ne 2
+. ie \\n[t.footnum] .ne 2
 . el .ne 1
-. if !\\n[en.footnum] .nr en.footpos 0\\n(FP+\\n(VSp
-. da en.footdiv
-. ev en.footenv
+. if !\\n[t.footnum] .nr t.footpos 0\\n(FP+\\n(VSp
+. da t.footdiv
+. ev t.footenv
 . RT
 . ps -1.5
 . vs -1.5
 . ad pl
-. nr en.footnum +1
-. if \\n[en.footnum]=1 \s[5]\m[#dddddd]\D'l 2.5i'\m[]\s0
-. ds en.footsign "\\n[en.footnum]
-. if \\n(.$>0 .ds en.footsign "\\$1
+. nr t.footnum +1
+. if \\n[t.footnum]=1 \s[5]\m[#dddddd]\D'l 2.5i'\m[]\s0
+. ds t.footsign "\\n[t.footnum]
+. if \\n(.$>0 .ds t.footsign "\\$1
 . in 2n
 . ti -1.5n
-\s+3\\*[en.footsign]\s-3
+\s+3\\*[t.footsign]\s-3
 . sp -1
 ..
 .de )
 . in 0
 . ev
 . di
-\h'-0.5n'\\*[en.footsign]\h'-0.5n'
-. nr en.footpos -\\n(dn
-. ch FT \\n[en.footpos]u
+\h'-0.5n'\\*[t.footsign]\h'-0.5n'
+. nr t.footpos -\\n(dn
+. ch FT \\n[t.footpos]u
 ' br
 ..
-.\" \h'-0.5n'\s-3\u\\*[en.footsign]\d\s+3\h'1p'\\$1 this line is needed for font without numerators
+.\" \h'-0.5n'\s-3\u\\*[t.footsign]\d\s+3\h'1p'\\$1 this line is needed for font without numerators
 .de FP
-. if \\n[en.footnum] \{\
-.  ev en.footenv
+. if \\n[t.footnum] \{\
+.  ev t.footenv
 '  nf
-.  en.footdiv
-.  rm en.footdiv
+.  t.footdiv
+.  rm t.footdiv
 .  ev
 . \}
-. nr en.footnum 0
+. nr t.footnum 0
 . ch FT \\n(FPu
 ..
 .\" Marginal notes -----------------
@@ -328,14 +328,14 @@
 .de EQ
 . RT
 . nf
-. di en.eqdiv
+. di t.eqdiv
 ..
 .de EN
 . di
 . if \\n(dn \{\
 .  sp .5
 .  ce
-.  en.eqdiv
+.  t.eqdiv
 .  sp .5
 . ad c
 . \}
