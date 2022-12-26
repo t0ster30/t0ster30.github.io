@@ -1,25 +1,18 @@
-.\" BASE MACROS
-.\" Registers and their default values
-.nr PS 10 \" font size
-.nr VS 13 \" vertical spacing
-.nr PO 1.1i \" left indent
-.nr LL 6i+1n \" line length
-.nr FP -1cm \" footer position
-.\" Internal registers
-.nr t.in 0   \" current indentation
-.nr t.ip 1m  \" IP indentation
-.nr t.pi 1m  \" RS indentation
-.nr t.pg 1   \" page numbering (0 disables)
-.nr vs.nl 1   \" numbered lines in code block (0 disables)
-.ds t.cl "0  \" header colour
-.ds TX \fRT\\h’-0.1667m’\\v’0.20v’E\\v’-0.20v’\\h’-0.125m’X\fP
-.ds LX \fRL\\h’-0.36m’\\v’-0.15v’\s-2A\s0\\h’-0.15m’\\v’0.15v’\fP\*(TX
-.
-.de RT \" Reset variables
+.nr PS 12	\" font size
+.nr VS 15	\" vertical spacing
+.nr PO 1.3i	\" left indent
+.nr LL 11.5cm	\" line length
+.nr FP -2cm	\" footer position
+.nr t.i 2m	\" IP indentation
+.nr t.pg 1	\" page numeration
+.nr t.l 1	\" numbered lines in code block
+.ds TX \\frT\\h’-.1667’\\v’.20’E\\v’-.20’\\h’-.125’X\\fP
+.ds LX \\frL\\h’-.36’\\v’-.15’\s-2A\\s0\\h’-.15’\\v’.15’\\fP\*(TX
+.de RT        \" reset
 . fi
-. ft R
-. ff R -*
-. ad p
+. ft r
+. ff r -*
+. ad pl
 . ps \\n(PS
 . vs \\n(VS
 . ll \\n(LLu
@@ -28,158 +21,119 @@
 . in \\n[t.in]u
 . cl 0
 ..
-.\" Header and footer macros
-.de FT.pg \" Footer page number
-. ff R +tnum
-. ie \\n[t.pg]=1 'tl '''\s+4\>%\<\s-4'
+.\" header and footer macros
+.de pg	\" numerize pages
+. ff r +tnum
+. lt 6i+1n
+. ie \\n[t.pg]=1 'tl '''\\s+3%\\s-3'
 . el 'sp
 ..
-.de HD  \" Page header (called by FT)
+.de HD	 \" page header (called by FT)
 . ev t.ft
 . RT
-. sp 1.3cm
-. HD.pg
+' sp 1.3cm
 . ev
 . ns
 . keepbop
 ..
-.de FT  \" Page footer
+.de FT  \" page footer
 . ev t.ft
 . FP
 ' sp |\\n(.pu+\\n(FPu
 . RT
 ' sp
-. FT.pg
+. pg
 ' bp
 . ev
 . if \\n(.t==(\\n(.p+(\\n(FP)) .HD
 ..
-.\" Font styles --------------------
-.\" r -- regular font
-.de r
-\\$3\\fR\\$1\fP\\$2
+.\" font styles --------------------
+.de i \"-- italic font
+\\$3\\fi\\$1\fp\\$2
 ..
-.\" i -- italic font
-.de i
-\\$3\\fI\\$1\fP\\$2
+.de b \"-- bold font
+\\$3\\fb\\$1\fp\\$2
 ..
-.\" b -- bold font
-.de b
-\\$3\\fB\\$1\fP\\$2
+.de u \"-- underline
+\\$3\\Z'\\$1'\v'.1'\\D'l \\w'\\$1'u 0'\\v'-.1'\\$2
 ..
-.\" ul -- underline
-.de ul
-\\$3\Z'\\$1'\v'.1m'\D'l \w'\\$1'u 0'\v'-.1m'\\$2
+.de r \"-- strikeout
+\\$3\\Z'\\$1'\\v'-.23'\\D'l \\w'\\$1'u 0'\\v'.25'\\$2
 ..
-.\" xl -- strikeout
-.de xl
-\\$3\\Z'\\$1'\\v'-.23m'\\D'l \\w'\\$1'u 0'\v'.25m'\\$2
+.de bx \"-- box
+. ie n \\fi\\$1\\fP
+. el \\$3\\Z'\\$1'\\v'.1'\\D'l 0 -.9'\
+\\v'.9'\\D'l \\w'\\$1'u 0'\
+\\v'-.9'\\h'-\\w'\\$1'u 0'\\D'l \\w'\\$1'u 0'\
+\\D'l 0 .9'\\v'-.1'\\$2
 ..
-.de bx
-. ie n \f[I]\\$1\f[P]
-. el \\$3\\Z'\\$1'\\v'+0.1m'\\D'l 0 -0.9m'\
-\\v'+0.9m'\\D'l \\w'\\$1'u 0'\
-\\v'-0.9m'\\h'-\\w'\\$1'u 0'\\D'l \\w'\\$1'u 0'\
-\\D'l 0 +0.9m'\\v'-0.1m'\\$2
-..
-.\" \\v'0.1m'\\D'p 0 -0.9m \\w 0 0 0.9m \\w 0'\\v'-0.1m'
 .de box
-\[br]\\$*\[br]\l'|0\[rn]'\l'|0\[ul'
+\\(br\\$*\\(br\\l'|0\\(rn'\\l'|0\\(ul'
 ..
-.de XXL
-. ie n \f[I]\\$1\f[P]
-.\" . el \\Z'\\$1'\\v'-.125m'\\D'l \\w'\\$1'u 0'\\v'-.295m'\\h'-\\w'\\$1'u 0'\\D'l \\w'\\$1'u 0'\v'.42m'
-. el \\Z'\\$1'\\v'-.125m'\\D'l \\w'\\$1'u 0'\\v'-.195m'\\h'-\\w'\\$1'u 0'\\D'l \\w'\\$1'u 0'\v'.32m'
-..
-.\" Paragraphs ---------------------
-.\" p -- paragraph
-.de p
+.de p  \"-- paragraph
 . RT
+. sp .5
 . ne 2
 ..
-.\" pp -- first-line indented paragraph
-.de pp
+.de pp \"-- first-line indented paragraph
 . p
-. ti +3n
+. ti .5cm+\\n(PSp
 ..
-.\" ip -- indented paragraph
-.de ip
+.de ip \"-- indented paragraph
 . p
-. if \\n(.$>1 .nr t.ip \\$2
-. in +\\n[t.ip]u
-\h'|-\\n[t.ip]u'\\$1
+. ie \\n(.$>1 .nr t.i \\$2
+. el .nr t.i 2m
+. in +\\n[t.i]u
+\h'|-\\n[t.i]u'\\$1
 . sp -1
 ..
-.\" xp -- backindented paragraph
-.de xp
-. RT
-. IP
-. ti -2m
+.de xp \"-- backindented paragraph
+. ip
+. ti -\\n[t.i]u
 ..
-.\" hp -- hanging indent paragraph
-.de hp
+.de hp \"-- hanging indent paragraph
 . p
 . mk
-. po -1m
+. ie \\n(.$>1 .po -\\$2
+. el .po -\\w'\\$0'u
 \\$1\~
 . br
 . po
 . rt
 ..
-.\" qp -- quoted paragraph
-.de qp
+.de qp \"-- quoted paragraph
 . p
-. in \\n[t.in]u+0.5i
-. ll -0.5i
+. in \\n[t.in]u+.5cm
+. ll -.5cm
 ..
-.\" qs -- quote start
-.de qs
-. p
-. if \\n(.$ .nr t.pi \\$1
-. nr t.in +\\n[t.pi]
-. ft I
-..
-.\" qe -- quote end
-.de qe
-. br
-. if \\n(.$ .nr t.pi \\$1
-. nr t.in -\\n[t.pi]
-..
-.\" t -- title
-.de t
+.de t \"-- title, author, & institution
+. HD
 . RT
-. ft HD
-' sp 1.3cm
-. ad l
-. ps \\n(PS+6
+. ps \\n(PS+7 \"6
 . vs \\n(VS+6
-. fi
-. if \\n(.$ \{\
-\\$*
-.  p
-. \}
-. dv Title "\\$*
+. lt \\n(LLu
+. tl '\\f(hd\\$*''\fr\s[10]\v'-.1'\n(dy.\?'\n(mo<10@0'\n(mo.20\n(yr\v'.1''
+. RT
+. sp .6v
+. in 1m
+. ps 9
+. dv Author "@au"
+. dv Instituition "@ins"
+. dv Title "\\$*"
 ..
-.\" h -- header
-.de h
-. p
-. sp 0.9
-. cl \\*[t.cl]
-. ft B
+.de h \"-- header
+. nr t.l 0
+. RT
+. sp .6
 . if \\n(.$ \{\
-\\$*
-.  p
+\\fb\\$*
+.  RT
 . \}
 . dv mark "\\$*" \\n(.% \\n(nl 1
+. ns
 ..
 .de @n
-.RT
 .if \\n(1T .sp 1
-.RT
-.ne 1.5
-.ne 4
-.ft B
-.if n .ul 1000
 .nr NS \\$1
 .if !\\n(.$ .nr NS 1
 .if !\\n(NS .nr NS 1
@@ -196,150 +150,123 @@
 .if \\n(NS-3 .as SN \\n(H4.
 .if \\n(NS-4 .as SN \\n(H5.
 ..
-.\"n -- numbered heading
-.de n
+.de n \"-- numbered header
 . RT
-. sp 0.25v
+. sp .25
 . @n \\$1
-\\*(SN \\$2
-. br
+\\fb\\*(SN \\$2
+. RT
 . ns
 . dv mark "\\*(SN \\$2" \\n(.% \\n(nl \\$1
 ..
-.\" a -- author
-.de a
-. sp 0.5v
-. RT
-. ft R
-. in 1n
-. ps 9
-. dv Author "@au"
-..
-.\" ai -- author’s institution
-.de ai
-. RT
-. in 1n
-. ft I
-. ps 9
-. dv Institution "@ins"
-..
-.\" ab -- abstract
-.de ab
+.de ab \"-- abstract
 . p
 . ce
-\f[R]\s[22]\v'-5p'\D'l 0.7P'\v'5p'\h'-1p'd\h'-2p'l\h'-2p'\v'-5p'\D'l 0.75P'\v'5p'\h'1.25p'\s0
-. sp 0.3
+\\fr\\s(22\\v'-5p'\\D'l .7P'\\v'5p'\\h'-1p'd\\h'-2p'l\\h'-2p'\\v'-5p'\\D'l .75P'\\v'5p'\h'1.25p'\s0
+. sp .3
 ..
-.\" ma -- mail
-.de ma
-.RT
-\fIstegosha@gmail.com\fP
+.de ma \"-- mail
+. RT
+\fistegosha@gmail.com\fP
 . ad c
 ..
-.\" d -- date
-.de d
+.de d \"-- date
 . RT
 \n(dy.\?'\n(mo<10@0'\n(mo.20\n(yr
 ..
-.\" bl -- bulleted list
-.de bl
+.de bl \"-- bulleted list
 . p
 . mk
-. if \\n(.$>1 .nr t.ip \\$2
-. in +\\n[t.ip]u+1n
-. ie \\$1=\0 \{\h'|-\\n[t.ip]u-1n'\(em\}
-. el \{\h'|-\\n[t.ip]u'\\$1\}
+. if \\n(.$>1 .nr t.i \\$2
+. in +\\n[t.i]u+1n
+. ie \\$1=\\0 \{\\h'|-\\n[t.i]u-1n'\\(em\}
+. el \{\\h'|-\\n[t.i]u'\\$1\}
 . br
 . rt
 ..
-.\" l -- numbered list
-.de l
-. nr t.nl +1
-. bl \\n[t.nl].
+.de l \"-- numbered list
+. nr t.l +1
+. ip \\n[t.l]. 1.3m
 ..
-.\" Footnotes ----------------------
-.\" ( -- start footnote
-.de (
-. ff R +numr
-. ie \\n[t.footnum] .ne 2
+.de li \"-- alternate numbered list
+. p
+. nm 1 1 1 0
+. nf
+..
+.de ( \"-- start footnote
+. ff r +numr
+. ie \\n[t.foot] .ne 2
 . el .ne 1
-. if !\\n[t.footnum] .nr t.footpos 0\\n(FP+\\n(VSp
+. if !\\n[t.foot] .nr t.footpos 0\\n(FP+\\n(VSp
 . da t.footdiv
 . ev t.footenv
 . RT
 . ps -1.5
 . vs -1.5
-. ad pl
-. nr t.footnum +1
-. if \\n[t.footnum]=1 \s[5]\m[#dddddd]\D'l 2.5i'\m[]\s0
-. ds t.footsign "\\n[t.footnum]
+. nr t.foot +1
+. if \\n[t.foot]=1 \\s5\\m[#ddd]\\D'l 2.5i'\\m[]\\s0
+. ds t.footsign "\\n[t.foot]
 . if \\n(.$>0 .ds t.footsign "\\$1
-. in 2n
+. in 1m
 . ti -1.5n
-\s+3\\*[t.footsign]\s-3
+\\s+3\\*[t.footsign]\\s-3
 . sp -1
 ..
-.de )
-. in 0
+.de ) \"-- end footnote
+. RT
 . ev
 . di
-\h'-0.5n'\\*[t.footsign]\h'-0.5n'
+. ie t.footsign=\\(dg \{\\v'-.25'\\h'-.5n'\\s-2\\*[t.footsign]\\$*\\s+2\\h'-.3n'\\v'.25'\}
+. el \{\\h'-.5n'\\*[t.footsign]\\$*\\h'-.5n'\}
 . nr t.footpos -\\n(dn
 . ch FT \\n[t.footpos]u
 ' br
 ..
-.\" \h'-0.5n'\s-3\u\\*[t.footsign]\d\s+3\h'1p'\\$1 this line is needed for font without numerators
+.\" \h'-.5n'\s-3\u\\*[t.footsign]\d\s+3\h'1p'\\$1 this line is needed for font without numerators
 .de FP
-. if \\n[t.footnum] \{\
+. if \\n[t.foot] \{\
 .  ev t.footenv
 '  nf
 .  t.footdiv
 .  rm t.footdiv
 .  ev
 . \}
-. nr t.footnum 0
+. nr t.foot 0
 . ch FT \\n(FPu
 ..
-.\" Marginal notes -----------------
-.\" may be removed for tmac.keep
-.\" notl -- left marginal note
-.de notl
-. p
+.\" marginal notes -----------------
+.\" may be removed in favor of tmac.keep
+.de ntl \"-- left marginal note
+. RT
 . mk
-. ll 3.05c
+. ll 3.6c
 . na
 . vs 10
-. po -7.35m
+. po -8m
 . cl #656577
-\s[-2]
+\\s-2
 ..
-.\" notr -- right marginal note
-.de notr
-. notl
-. po 7.15i
+.de nt \"-- right marginal note
+. ntl
+. po 6i
 ..
-.\" note -- end note
-.de note
-\s0
+.de nte \"-- end note
+\\s0
 . rt
 . RT
 ..
 .\" Preprocessor macros
-.de EQ
-. RT
-. nf
+.de eq
+. p
 . di t.eqdiv
 ..
-.de EN
+.de en
 . di
 . if \\n(dn \{\
 .  sp .5
-.  ce
 .  t.eqdiv
 .  sp .5
-. ad c
 . \}
-. fi
 ..
 .de PS
 . br
@@ -350,86 +277,73 @@
 .de PE
 . in
 ..
-.de TS
+.de ts
 . br
 . RT
-. sp .25
+. ll \\n(LLu+6cm \"5.5cm
+. ps \\n(PS-.5
+. sp .35 \".25
 ..
-.de TE
-. sp .55
+.de te
+. sp .3
 ..
 .\" TBL fix
 .de BP
 . ie '\\n(.z'' .bp \\$1
 . el \!.BP \\$1
 ..
-.
 .\" ugrind setup
 .de vS
 . br
 . ev ev-code
-. nr ev-code 1
 . sp .5v
 . nf
 . in 1v
-. ft CR
-. ps 8
+. ft cr
+. ps \\n(PS-2
 ..
 .de vE
 . br
 . ev
-. rr ev-code
 ..
-.\" Citations
-.ds ct [\\$1]
+.de k \"-- begin a keep
+. keepbeg f
+..
+.de ke \"-- end a keep
+. keepend
+..
 .\" rf refers
 .Ff [%A {, %y}]      \" (Author, Year)
-.Fr %a: {(%y)} {\fI%t\fR}. {\*Q%q\*U}. %n, %d. %c: %p. {Доступно на \m[#577eaa]%w\m[]}
-.\" c1 -- start code block
-.de c1
-. RT
+.Fr %a: {(%y)} {\fI%t\fr}. {\*Q%q\*U}. %n, %d. %c: %p. {Доступно на \m[#577eaa]%w\m[]}
+.de c1 \"-- start code block
+. p
 . ev ev-code
-. sp .15v
+. sp .35v
 . nf
-. if \\n[vs.nl]=1 .nm 1 1 0.5 0
+. if \\n[t.l]=1 .nm 1 1 .5 0
 . in 1m
-. ft CR
+. ft cr
 . ps 8
-. ta 360uL 720uL 1440uL
+. ta 360uL +360uL
 ..
-.\" c2 -- end code block
-.de c2 \" code block end
+.de c2 \"-- end code block
 . ev
-. RT
+. p
 ..
-.de vS
-. c1
-..
-.de vE
-. c2
-..
-.\" Initialization
+.\" initialization
 .de init
 . lg 1
 . kn 1
 . wh \\n(FPu FT
-. hpf /home/eg0rka/doc/roff/hyph/hyph-ru.pat.txt /home/eg0rka/doc/roff/hyph/hyph-ru.hyp.txt /home/eg0rka/doc/roff/hyph/hyph-ru.chr.txt
-. hlm 2
-. hy 2
-. hycost 100 200 400
+. hpf ../hyph/hyph-ru.pat.txt ../hyph/hyph-ru.hyp.txt ../hyph/hyph-ru.chr.txt
+. hlm 1
+. hy 4
+. hycost 200 300 500
 . hyp 10
 . ss 11 0
 . ssh 15
-. pmll 20 10
-.\". pl 841.995p
-.\". pw 595.35p
+. pmll 30 15
 ..
-.\"de 2c \" a try for two-column mode
-.\"'nr L1 \\n(LL*7/15)
-.\" alternate numbered list
-.\" .p
-.\" .nm 1 1 1 0
-.\" .nf
-.\" ....
-.\" .nm
 .init
+.blm p
+.\" lsm ti pp \" does not work :[
