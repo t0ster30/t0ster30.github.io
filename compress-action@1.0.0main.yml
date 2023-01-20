@@ -1,0 +1,3 @@
+name: Checkout Repo
+uses: actions/checkout@master
+    uses: charlesworth/compress-action@1.0
