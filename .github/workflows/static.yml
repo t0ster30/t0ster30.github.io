@@ -4,7 +4,7 @@ on:
   push:
     branches: ["master"]
 
-  # allows to run manually from the actions tab
+  # allows to be run manually from the actions tab
   workflow_dispatch:
 
 permissions:
@@ -25,12 +25,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: CompressFiles
-        uses: stefh/ghaction-CompressFiles@v2
-        with:
-          path: ${{ env.PUBLISH_DIR }}
-          extensions: '.js,.css,.html,.htm'
-          tools: 'brotli,gzip'
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact

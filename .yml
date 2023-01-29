@@ -1,2 +1,0 @@
-- name: compress-action
-  uses: ghaction-CompressFiles@v1
