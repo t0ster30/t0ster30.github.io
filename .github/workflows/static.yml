@@ -25,9 +25,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: compress files in repo
-        id: brotli
-        uses: Charlesworth/compress-action@1.0.0
+      - name: CompressFiles
+        uses: stefh/ghaction-CompressFiles@v2
+        with:
+          path: ${{ env.PUBLISH_DIR }}
+          extensions: '.js,.css,.html,.htm'
+          tools: 'brotli,gzip'
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
