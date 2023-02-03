@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?><rss version="2.0"><channel>
+<title>tsr’s log</title>
+<description>log ’bout *nix, typing, &amp; software</description><link>https://tsr.neocities.org</link><lastBuildDate>Sat, 04 Feb 2023 01:10 +0000</lastBuildDate><ttl>20000</ttl>
+<item><title>tiny english notes</title>
+<description>notes about the goddamned language</description>
+<link>https://t0ster30.github.io/eng</link>
+<pubDate>Tue, 23 May 2022 00:00 +0000</pubDate></item>
+
+<item><title>macos</title>
+<description>a list of distinctive macos software</description>
+<link>https://t0ster30.github.io/eng</link>
+<pubDate>Tue, 19 Sep 2022 00:00 +0000</pubDate></item>
+
+<item><title>things I don’t care about</title>
+<description>that one should not be on the rss, but who cares :þ</description>
+<link>https://t0ster30.github.io/care</link>
+<pubDate>Tue, 8 Oct 2022 00:00 +0000</pubDate></item>
+
+<item><title>modern markup</title>
+<description>Idee für den Seitenlayout</description>
+<link>https://t0ster30.github.io/eng</link>
+<pubDate>Tue, 13 Oct 2022 00:00 +0000</pubDate></item>
+
+<item><title>linux</title>
+<description>list of useful software for the biggest *nix</description>
+<link>https://t0ster30.github.io/linux</link>
+<pubDate>Tue, 14 Oct 2018 00:00 +0000</pubDate></item>
+
+<item><title>abbreviations</title>
+<description>list of abbreviations for faster typing</description>
+<link>https://t0ster30.github.io/34a</link>
+<pubDate>Tue, 22 Oct 2022 00:00 +0000</pubDate></item>
+
+<item><title>typing</title>
+<description>why typing is awful, and how should u improve it</description>
+<link>https://t0ster30.github.io/typing</link>
+<pubDate>Tue, 22 Oct 2022 00:00 +0000</pubDate></item>
+</channel></rss>
